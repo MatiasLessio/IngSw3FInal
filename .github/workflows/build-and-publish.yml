@@ -30,7 +30,7 @@ jobs:
       with:
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
           export_default_credentials: true
-          project_id: diario-414100
+          project_id: ingsw3-428221
 
     - name: Configure Docker for Container Registry
       run: gcloud auth configure-docker
@@ -62,5 +62,5 @@ jobs:
             --region=us-central1 \
             --port=8090 \
             --max-instances=15 \
-            --set-env-vars=DB_HOST=34.31.127.208,DB_PORT=3306,DB_NAME=diario,DB_USER=root,DB_PASS=root \
+            --set-env-vars=DB_HOST=34.31.127.208,DB_PORT=3306,DB_NAME=ingsw3,DB_USER=root,DB_PASS=root \
             --allow-unauthenticated
