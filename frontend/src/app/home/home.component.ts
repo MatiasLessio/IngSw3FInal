@@ -32,6 +32,11 @@ export class HomeComponent {
   ) {
 
   }
+
+  clear(){
+    sessionStorage.clear();
+    window.location.href = 'Login'
+  }
   reminders : Reminder[] = [];
   getReminders(){
     this._reminderService.GetReminders().subscribe((response)=>{

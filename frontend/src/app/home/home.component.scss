@@ -39,3 +39,18 @@
   .material-icons:hover{
     cursor: pointer;
   }
+
+  .logout-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* Or another background color to ensure visibility */
+    padding: 10px;
+    box-shadow: 0 -1px 5px rgba(0,0,0,0.1); /* Optional shadow for better visibility */
+}
+.logout-icon {
+    margin-right: 8px;
+}
