@@ -1,0 +1,29 @@
+<div class="container">
+    <mat-card appearance="outlined" style="width: 20%;">
+        <mat-card-header>
+            <mat-card-title style="color: white; margin-bottom: 1rem;">Login</mat-card-title>
+        </mat-card-header>
+        <form [formGroup]="loginForm">
+            <div style="display: flex; gap: 1rem;">
+                <mat-form-field appearance="fill" style="flex: 1;">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username">
+                </mat-form-field>
+            </div>
+            <div style="display: flex; gap: 1rem;">
+                <mat-form-field appearance="fill" style="flex: 1;">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password">
+                </mat-form-field>
+            </div>
+            <a style="color: white; margin-left: 1rem;" href="/Register">Register</a>
+            <div style="display: flex; justify-content: end; padding: 1rem;">
+                <button mat-raised-button *ngIf="!loadingRequest" color="primary" type="submit" (click)="login()">Login</button>
+                <button *ngIf="loadingRequest" mat-button color="primary">
+                    <mat-spinner diameter="24" style="display: flex; align-items: center;" color="warn"></mat-spinner>
+                </button>
+            </div>
+            
+        </form>
+    </mat-card>
+</div>

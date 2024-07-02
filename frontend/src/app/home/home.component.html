@@ -1,0 +1,23 @@
+<div class="container">
+    <div style="display: flex; justify-content: space-between;">
+        <h1>Home / <strong>Reminders</strong></h1>
+        <h2>Hi <strong>{{user}}</strong></h2>
+    </div>
+    <button mat-button (click)="addReminder()" color="warn">Add new reminder</button>
+    <div class="alert-container">
+        
+        <div *ngFor="let reminder of reminders" class="alert-card">
+            <div>
+                <div class="alert-header">
+                    <span class="alert-date">{{ reminder.title}}</span>
+                </div>
+                <div class="alert-description">{{ reminder.description }}</div>
+            </div>
+            <div style="text-align: right;">
+                <mat-icon (click)="editReminder(reminder)" matTooltip="Edit Reminder">edit</mat-icon>
+                <mat-icon (click)="deleteReminder(reminder)" matTooltip="Delete Reminder">delete_forever</mat-icon>
+            </div>
+            
+        </div>
+    </div>
+</div>

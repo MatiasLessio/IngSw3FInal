@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    padding: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Opcional, depende de tus necesidades */
+    height: 100%; /* Opcional, depende de tus necesidades */
+}
+
+.mat-mdc-form-field{
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
