@@ -1,0 +1,66 @@
+name: Build and Publish
+on:
+  push:
+    branches:
+      - main
+jobs:
+
+  build_publish_deploy:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Build images
+      run: docker-compose build
+        
+    - name: Login to Docker Hub
+      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+        
+    - name: Tag and Push Docker images
+      run: |
+          docker tag ingsw3final_backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/ingsw3final-backend:latest
+          docker tag ingsw3final_frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/ingsw3final-frontend:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ingsw3final-frontend:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/ingsw3final-backend:latest
+
+    - name: Configurar auth Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v0.5.0
+      with:
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+          export_default_credentials: true
+          project_id: ingsw3-428221
+
+    - name: Configure Docker for Container Registry
+      run: gcloud auth configure-docker
+
+    - name: Push Docker images to Google Cloud Container Registry
+      run: |
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/ingsw3final-backend:latest gcr.io/ingsw3-428221/ingsw3final-backend-gc
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/ingsw3final-frontend:latest gcr.io/ingsw3-428221/ingsw3final-frontend-gc
+          docker push gcr.io/ingsw3-428221/ingsw3final-frontend-gc:latest
+          docker push gcr.io/ingsw3-428221/ingsw3final-backend-gc:latest
+         
+
+    - name: Deploy Frontend
+      run: |
+          gcloud run deploy frontend \
+            --image=gcr.io/ingsw3-428221/ingsw3final-frontend-gc \
+            --platform=managed \
+            --region=us-central1 \
+            --allow-unauthenticated \
+            --port=4200 \
+            --max-instances=15
+
+    - name: Deploy Backend
+      run: |
+          gcloud run deploy backend \
+           --image=gcr.io/ingsw3-428221/ingsw3final-backend-gc \
+            --add-cloudsql-instances ingsw3-428221:us-central1:ingsw3 \
+            --platform=managed \
+            --region=us-central1 \
+            --port=8090 \
+            --max-instances=15 \
+            --set-env-vars=DB_HOST=34.31.144.174,DB_PORT=3306,DB_NAME=ingsw3,DB_USER=root,DB_PASS=root \
+            --allow-unauthenticated
