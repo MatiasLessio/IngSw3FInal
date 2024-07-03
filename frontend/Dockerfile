@@ -2,7 +2,7 @@
 FROM node:16 AS build
 
 # Crear el directorio de trabajo
-WORKDIR /app
+WORKDIR /frontend
 
 # Copiar el package.json y el package-lock.json
 COPY package*.json ./
@@ -20,7 +20,7 @@ RUN npm run build --prod
 FROM nginx:1.21
 
 # Copiar los archivos construidos desde la etapa anterior
-COPY --from=build /app/dist/your-angular-app /usr/share/nginx/html
+COPY --from=build /frontend/dist/frontend /usr/share/nginx/html
 
 # Exponer el puerto 4200
 EXPOSE 4200
