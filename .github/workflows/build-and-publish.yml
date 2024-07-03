@@ -39,7 +39,7 @@ jobs:
       run: |
         docker tag ingsw3final_backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
         docker tag ingsw3final_frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
-        docker tag db:latest ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
+        docker tag ingsw3final_db:latest ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
       
     - name: Push images
       run: |
