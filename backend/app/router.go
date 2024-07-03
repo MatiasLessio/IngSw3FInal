@@ -1,6 +1,8 @@
 package app
 
 import (
+	"fmt"
+	"net/http"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -20,6 +22,7 @@ func StartApp() {
 	}))
 	mapUrls(router)
 	log.Info("Starting server")
-	router.Run("backend-5ynfwgsmkq-uc.a.run.app")
+	router.Run()
+	log.Fatal(http.ListenAndServe(fmt.Sprintf("backend-5ynfwgsmkq-uc.a.run.app:8090"), nil))
 
 }
