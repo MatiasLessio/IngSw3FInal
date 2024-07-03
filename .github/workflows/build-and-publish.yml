@@ -79,11 +79,11 @@ jobs:
     - name: Run Docker db container to extract SQL file
       run: |
         docker create --name temp-container matiaslessioucc/db:latest
-        docker cp temp-container:/docker-entrypoint-initdb.d/ingwe3.sql ./ingwe3.sql
+        docker cp temp-container:/docker-entrypoint-initdb.d/ingsw3.sql ./ingsw3.sql
         docker rm temp-container
 
     - name: Upload SQL file to Cloud Storage
-      run: gsutil cp ./ingwe3.sql gs://ingsw3
+      run: gsutil cp ./ingsw3.sql gs://ingsw3
 
     - name: Tag backend and frontend Docker images
       run: |
