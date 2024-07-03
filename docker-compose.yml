@@ -7,5 +7,6 @@ services:
       - "4200:4200"
   backend:
     build: ./backend
+    restart: on-failure
     ports:
       - "8090:8090"

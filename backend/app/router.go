@@ -55,5 +55,5 @@ func StartApp() {
 	}
 
 	// Iniciar el servidor
-	engine.Run(":8090")
+	engine.Run("")
 }

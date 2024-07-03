@@ -17,9 +17,9 @@ var (
 
 func init() {
 	// DB Connections Paramters
-	DBName := "ingsw3-428221:us-central1:ingsw3" //Nombre de la base de datos local de ustedes
-	DBUser := "root"                             //usuario de la base de datos, habitualmente root
-	DBPass := "root"                             //password del root en la instalacion
+	DBName := "ingsw3" //Nombre de la base de datos local de ustedes
+	DBUser := "root"   //usuario de la base de datos, habitualmente root
+	DBPass := "root"   //password del root en la instalacion
 	//34.31.144.174
 
 	DBHost := "34.31.144.174" //host de la base de datos. hbitualmente 127.0.0.1
