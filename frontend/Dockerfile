@@ -1,17 +1,25 @@
-# Utiliza una imagen ligera de Node.js como base
-FROM node:latest as build
+# Utiliza una imagen ligera de Node.js como base para construir la aplicación
+FROM node:alpine AS build
 
-WORKDIR /usr/local/frontend
-COPY ./ /usr/local/frontend/
+# Establece el directorio de trabajo en /app
+WORKDIR /app
 
+# Copia los archivos de tu aplicación al contenedor
+COPY package*.json ./
 RUN npm install
+COPY . .
 
-#RUN npm install -g @angular/cli@16.2.0
-#RUN npm install sweetalert2
+# Compila la aplicación Angular
+RUN npm run build --prod
 
-RUN npm run build
+# Utiliza una imagen ligera de Nginx para servir la aplicación
+FROM nginx:alpine
 
-FROM nginx:latest
-COPY --from=build /usr/local/frontend/dist/frontend /usr/share/nginx/html
+# Copia los archivos compilados al directorio de Nginx
+COPY --from=build /app/dist/frontend /usr/share/nginx/html
 
+# Expone el puerto en el que el servidor de Nginx escucha
 EXPOSE 4200
+
+# Comando para iniciar Nginx
+CMD ["nginx", "-g", "daemon off;"]

@@ -7,6 +7,7 @@ import (
 	service "backend/services/implementations"
 
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 )
 
 func mapUrls(engine *gin.Engine) {
@@ -35,4 +36,6 @@ func mapUrls(engine *gin.Engine) {
 		authorized.GET("/api/Reminders", reminderControllerImplementation.GetRemindersByUserId)
 		authorized.DELETE("/api/Reminders/Delete/:reminderId", reminderControllerImplementation.DeleteReminder)
 	}
+
+	log.Info("finishing url mappings...")
 }
