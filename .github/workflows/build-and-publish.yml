@@ -62,5 +62,5 @@ jobs:
             --region=us-central1 \
             --port=8090 \
             --max-instances=15 \
-            --set-env-vars=DB_HOST=34.31.144.174,DB_PORT=3306,DB_NAME=ingsw3,DB_USER=root,DB_PASS=root,PORT=8090 \
+            --set-env-vars=DB_HOST=34.31.144.174,DB_PORT=3306,DB_NAME=ingsw3,DB_USER=root,DB_PASS=root \
             --allow-unauthenticated
