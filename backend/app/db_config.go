@@ -29,7 +29,7 @@ func init() {
 
 	log.Info("Started connecting database...")
 	//db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")
-	db, err = gorm.Open("mysql", "root:root@tcp(34.31.144.174:3306)/ingsw3?charset=utf8&parseTime=True")
+	db, err = gorm.Open("mysql", "root:root@tcp(ingsw3-428221:us-central1:ingsw3:3306)/ingsw3?charset=utf8&parseTime=True")
 	if err != nil {
 		log.Info("Connection Failed to Open")
 		log.Fatal(err)
