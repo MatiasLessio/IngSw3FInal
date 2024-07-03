@@ -1,8 +1,6 @@
 package app
 
 import (
-	"fmt"
-	"net/http"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -11,7 +9,6 @@ import (
 )
 
 func StartApp() {
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":8090"), nil))
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"}, // Especifica tu origen aquí
@@ -23,6 +20,6 @@ func StartApp() {
 	}))
 	mapUrls(router)
 	log.Info("Starting server")
-	router.Run(":9000")
+	router.Run(":8090")
 
 }
