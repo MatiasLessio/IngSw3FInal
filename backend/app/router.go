@@ -20,6 +20,6 @@ func StartApp() {
 	}))
 	mapUrls(router)
 	log.Info("Starting server")
-	router.Run()
+	_ = router.Run()
 
 }
