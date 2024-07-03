@@ -4,11 +4,11 @@ FROM node:alpine AS build
 # Establece el directorio de trabajo en /app
 WORKDIR /app
 
-# Copia los archivos de tu aplicación al contenedor
-COPY package*.json ./
-RUN npm install
+
 COPY . .
 
+
+RUN npm install
 # Compila la aplicación Angular
 RUN npm run build --prod
 
@@ -18,8 +18,4 @@ FROM nginx:alpine
 # Copia los archivos compilados al directorio de Nginx
 COPY --from=build /app/dist/frontend /usr/share/nginx/html
 
-# Expone el puerto en el que el servidor de Nginx escucha
-EXPOSE 4200
 
-# Comando para iniciar Nginx
-CMD ["nginx", "-g", "daemon off;"]
