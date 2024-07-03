@@ -21,7 +21,6 @@ func init() {
 	DBName := os.Getenv("DB_NAME") //Nombre de la base de datos local de ustedes
 	DBUser := os.Getenv("DB_USER") //usuario de la base de datos, habitualmente root
 	DBPass := os.Getenv("DB_PASS") //password del root en la instalacion
-
 	DBHost := os.Getenv("DB_HOST") //host de la base de datos. hbitualmente 127.0.0.1
 	// ------------------------
 	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")
