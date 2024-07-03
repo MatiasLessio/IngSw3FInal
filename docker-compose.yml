@@ -42,6 +42,12 @@ services:
     depends_on:
       cloudsqlproxy:
         condition: service_started
+    environment:
+      DB_NAME: ingsw3
+      DB_USER: root
+      DB_PASS: root
+      DB_HOST: "34.31.144.174"
+      DB_PORT: "3306"
 
   frontend:
     container_name: frontend
