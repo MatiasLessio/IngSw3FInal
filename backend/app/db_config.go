@@ -4,6 +4,7 @@ import (
 	"backend/clients/reminders"
 	"backend/clients/users"
 	"backend/models"
+	"os"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -17,12 +18,11 @@ var (
 
 func init() {
 	// DB Connections Paramters
-	DBName := "ingsw3" //Nombre de la base de datos local de ustedes
-	DBUser := "root"   //usuario de la base de datos, habitualmente root
-	DBPass := "root"   //password del root en la instalacion
-	//34.31.144.174
+	DBName := os.Getenv("DB_NAME") //Nombre de la base de datos local de ustedes
+	DBUser := os.Getenv("DB_USER") //usuario de la base de datos, habitualmente root
+	DBPass := os.Getenv("DB_PASS") //password del root en la instalacion
 
-	DBHost := "34.31.144.174" //host de la base de datos. hbitualmente 127.0.0.1
+	DBHost := os.Getenv("DB_HOST") //host de la base de datos. hbitualmente 127.0.0.1
 	// ------------------------
 	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")
 
