@@ -9,7 +9,6 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	log "github.com/sirupsen/logrus"
-	"gorm.io/driver/mysql"
 )
 
 var (
@@ -29,11 +28,8 @@ func init() {
 	log.Infof("Envs: DBName: %s, DBUser: %s, DBHost: %s", DBName, DBUser, DBHost, DBPass)
 
 	log.Info("Started connecting database...")
-	dsn := DBUser + ":" + DBPass + "@tcp(" + DBHost + ":3306)/" + DBName + "?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		log.Fatal("Failed to connect to database:", err)
-	}
+	//db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")
+	db, err = gorm.Open("mysql", "root:root@tcp(34.31.144.174:3306)/ingsw3?charset=utf8&parseTime=True")
 	if err != nil {
 		log.Info("Connection Failed to Open")
 		log.Fatal(err)

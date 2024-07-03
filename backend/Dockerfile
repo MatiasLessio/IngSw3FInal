@@ -1,6 +1,6 @@
 FROM golang:1.18
 
-EXPOSE 8090
+EXPOSE 8080
 
 ADD . /backend
 WORKDIR /backend
