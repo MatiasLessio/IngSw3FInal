@@ -41,16 +41,6 @@ jobs:
           docker tag ${{ secrets.DOCKERHUB_USERNAME }}/ingsw3final-frontend:latest gcr.io/ingsw3-428221/ingsw3final-frontend-gc
           docker push gcr.io/ingsw3-428221/ingsw3final-frontend-gc:latest
           docker push gcr.io/ingsw3-428221/ingsw3final-backend-gc:latest
-            
-    - name: Deploy Frontend
-      run: |
-          gcloud run deploy frontend \
-            --image=gcr.io/ingsw3-428221/ingsw3final-frontend-gc \
-            --platform=managed \
-            --region=us-central1 \
-            --allow-unauthenticated \
-            --port=4200 \
-            --max-instances=15
 
     - name: Deploy Backend
       run: |
@@ -63,3 +53,14 @@ jobs:
             --max-instances=15 \
             --set-env-vars=DB_HOST=34.31.144.174,DB_PORT=3306,DB_NAME=ingsw3,DB_USER=root,DB_PASS=root \
             --allow-unauthenticated
+    - name: Deploy Frontend
+      run: |
+          gcloud run deploy frontend \
+            --image=gcr.io/ingsw3-428221/ingsw3final-frontend-gc \
+            --platform=managed \
+            --region=us-central1 \
+            --allow-unauthenticated \
+            --port=4200 \
+            --max-instances=15
+
+    
