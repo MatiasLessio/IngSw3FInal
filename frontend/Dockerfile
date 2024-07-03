@@ -1,19 +1,29 @@
-# Utiliza una imagen ligera de Node.js como base
-FROM node:alpine
+# Usar una imagen base de Node.js para construir la aplicación
+FROM node:16 AS build
 
-# Expone el puerto en el que el servidor de desarrollo de Angular escucha
-EXPOSE 4200
+# Crear el directorio de trabajo
+WORKDIR /app
 
-# Establece el directorio de trabajo en /frontend
-WORKDIR /frontend
+# Copiar el package.json y el package-lock.json
+COPY package*.json ./
 
-# Copia los archivos de tu aplicación al contenedor
-COPY . .
-
-# Instala las dependencias globales y locales necesarias
-RUN npm install -g @angular/cli@16.2.0
-RUN npm install sweetalert2
+# Instalar las dependencias
 RUN npm install
 
-# Comando para iniciar el servidor de desarrollo de Angular y exponerlo externamente
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+# Copiar el resto del código de la aplicación
+COPY . .
+
+# Construir la aplicación Angular
+RUN npm run build --prod
+
+# Usar una imagen base de Nginx para servir la aplicación
+FROM nginx:1.21
+
+# Copiar los archivos construidos desde la etapa anterior
+COPY --from=build /app/dist/your-angular-app /usr/share/nginx/html
+
+# Exponer el puerto 4200
+EXPOSE 4200
+
+# Comando por defecto para ejecutar Nginx
+CMD ["nginx", "-g", "daemon off;"]
