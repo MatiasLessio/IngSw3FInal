@@ -26,7 +26,6 @@ services:
         ]
       timeout: 20s
       retries: 10
-
   backend:
     container_name: backend
     build: ./backend
@@ -37,7 +36,7 @@ services:
       DB_NAME: ingsw3
       DB_USER: root
       DB_PASS: root
-      DB_HOST: "127.0.0.1"
+      DB_HOST: "34.31.144.174"
       DB_PORT: "3306"
 
   frontend:
