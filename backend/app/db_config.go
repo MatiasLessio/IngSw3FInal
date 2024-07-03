@@ -4,7 +4,6 @@ import (
 	"backend/clients/reminders"
 	"backend/clients/users"
 	"backend/models"
-	"os"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -17,20 +16,17 @@ var (
 )
 
 func init() {
-	// Leer variables de entorno
-	DBName := os.Getenv("DB_NAME") // Nombre de la base de datos
-	DBUser := os.Getenv("DB_USER") // Usuario de la base de datos
-	DBPass := os.Getenv("DB_PASS") // Contraseña del usuario de la base de datos
-	DBHost := os.Getenv("DB_HOST") // Debería ser "localhost" cuando se usa Cloud SQL Proxy
-	DBPort := os.Getenv("DB_PORT") // Debería ser el puerto que el proxy expone
-
+	// DB Connections Paramters
+	/*
+		DBName := os.Getenv("DB_NAME") //Nombre de la base de datos local de ustedes
+		DBUser := os.Getenv("DB_USER") //usuario de la base de datos, habitualmente root
+		DBPass := os.Getenv("DB_PASS") //password del root en la instalacion
+		DBHost := os.Getenv("DB_HOST") //host de la base de datos. hbitualmente 127.0.0.1
+		// ------------------------
+	*/
 	log.Info("Started connecting database...")
-
-	// Construir la cadena de conexión
-	dsn := DBUser + ":" + DBPass + "@tcp(" + DBHost + ":" + DBPort + ")/" + DBName + "?charset=utf8&parseTime=True"
-
-	// Abrir conexión a la base de datos
-	db, err = gorm.Open("mysql", dsn)
+	//db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")
+	db, err = gorm.Open("mysql", "root:@tcp(db:3306)/ingsw3?charset=utf8&parseTime=True")
 	if err != nil {
 		log.Info("Connection Failed to Open")
 		log.Fatal(err)
@@ -38,13 +34,13 @@ func init() {
 		log.Info("Connection Established")
 	}
 
-	// Asignar la conexión de base de datos a los clientes
+	// We need to add all CLients that we build
 	users.Db = db
 	reminders.Db = db
 }
 
 func StartDbEngine() {
-	// Migrar las tablas de la base de datos
+	// We need to migrate all classes model.
 	db.AutoMigrate(&models.User{})
 	db.AutoMigrate(&models.Reminder{})
 

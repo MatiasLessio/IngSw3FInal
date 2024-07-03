@@ -3,6 +3,8 @@ SET time_zone = "+00:00";
 
 --
 --
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+
 CREATE DATABASE IF NOT EXISTS `ingsw3` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `ingsw3`;
 
@@ -25,6 +27,8 @@ USE `ingsw3`;
 --
 -- Table structure for table `reminders`
 --
+
+
 
 DROP TABLE IF EXISTS `reminders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

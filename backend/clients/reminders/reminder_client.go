@@ -40,7 +40,7 @@ func DeleteReminder(reminderId int) e.ApiError {
 }
 
 func UpdateReminder(reminder models.Reminder) (models.Reminder, e.ApiError) {
-	result := Db.Model(&reminder).Updates(models.Reminder{Title: reminder.Title, Description: reminder.Description}).Where("ReminderId = ?", reminder.ReminderId)
+	result := Db.Model(&reminder).Where("reminder_id = ?", reminder.ReminderId).Updates(models.Reminder{Title: reminder.Title, Description: reminder.Description})
 	if result.Error != nil {
 
 		return reminder, e.NewBadRequestApiError("error while updating reminder")
