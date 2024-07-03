@@ -12,6 +12,3 @@ services:
     build: ./frontend
     ports:
       - "4200:4200"
-    depends_on:
-      backend:
-        condition: service_started

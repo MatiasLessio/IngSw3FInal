@@ -5,9 +5,11 @@ import (
 	userController "backend/controllers/user"
 	middleware "backend/middleware"
 	service "backend/services/implementations"
+
+	"github.com/gin-gonic/gin"
 )
 
-func mapUrls() {
+func mapUrls(engine *gin.Engine) {
 	// Inicializar servicios
 	userServiceImplementation := service.UserServiceImplementation{}
 	reminderServiceImplementation := service.ReminderServiceImplementation{}

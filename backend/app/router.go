@@ -8,13 +8,9 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-var (
-	engine *gin.Engine
-)
-
-func init() {
-	engine = gin.Default()
-	engine.Use(cors.New(cors.Config{
+func StartApp() {
+	router := gin.Default()
+	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"}, // Especifica tu origen aquí
 		AllowMethods:     []string{"PUT", "PATCH", "GET", "POST", "DELETE"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
@@ -22,13 +18,8 @@ func init() {
 		AllowCredentials: true,
 		MaxAge:           12 * time.Hour,
 	}))
-
-}
-
-func StartRoute() {
-	mapUrls()
-
+	mapUrls(router)
 	log.Info("Starting server")
-	engine.Run()
+	router.Run()
 
 }

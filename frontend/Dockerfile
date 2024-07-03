@@ -6,8 +6,8 @@ COPY ./ /usr/local/frontend/
 
 RUN npm install
 
-RUN npm install -g @angular/cli@16.2.0
-RUN npm install sweetalert2
+#RUN npm install -g @angular/cli@16.2.0
+#RUN npm install sweetalert2
 
 RUN npm run build
 
