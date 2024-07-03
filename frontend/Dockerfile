@@ -1,22 +1,18 @@
-# Build stage
+# Utiliza una imagen ligera de Node.js como base para construir la aplicación
 FROM node:alpine AS build
 
+# Establece el directorio de trabajo en /app
 WORKDIR /app
 COPY package*.json ./
+
 COPY . ./
 
 RUN npm install -g @angular/cli@16.2.0
 RUN npm install sweetalert2
 RUN npm install
-RUN npm run build
+# Compila la aplicación Angular
+RUN npm run build --base-href /frontend/
 
-# Production stage
-FROM nginx:alpine
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
+EXPOSE 4200
 
-# Copia el archivo de configuración de nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "node", "server.js" ]
