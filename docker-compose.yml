@@ -27,26 +27,17 @@ services:
       timeout: 20s
       retries: 10
 
-  cloudsqlproxy:
-    image: gcr.io/cloudsql-docker/gce-proxy:1.19.1
-    command: /cloud_sql_proxy -dir=/cloudsql -instances=ingsw3-428221:us-central1:ingsw3=tcp:3306 -credential_file=/config/credentials.json
-    volumes:
-      - ./credentials.json:/config/credentials.json
-
   backend:
     container_name: backend
     build: ./backend
     restart: on-failure
     ports:
       - "8080:8080"
-    depends_on:
-      cloudsqlproxy:
-        condition: service_started
     environment:
       DB_NAME: ingsw3
       DB_USER: root
       DB_PASS: root
-      DB_HOST: "34.31.144.174"
+      DB_HOST: "127.0.0.1"
       DB_PORT: "3306"
 
   frontend:
