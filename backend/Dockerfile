@@ -10,4 +10,4 @@ RUN go mod tidy
 RUN go build -o backend
 RUN chmod +x /backend
 
-ENTRYPOINT [ "/backend/backend" ]
+CMD ["./backend"]
