@@ -37,9 +37,9 @@ jobs:
         
     - name: Tag images
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/backend:latest ./backend
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/frondend:latest ./frontend
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/db:latest ./db
+        docker tag ingsw3final_backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+        docker tag ingsw3final_frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+        docker tag ingsw3:latest ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
       
     - name: Push images
       run: |

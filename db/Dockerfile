@@ -1,7 +1,5 @@
 FROM mysql:8
 
-
-
 ENV HOST=0.0.0.0
 # Variables de entorno para configurar la base de datos
 

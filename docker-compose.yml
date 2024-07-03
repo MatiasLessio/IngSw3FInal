@@ -4,6 +4,7 @@ services:
   db:
     container_name: db
     build: ./db
+    image: ingsw3
     ports:
       - "3306:3306"
     volumes:
@@ -11,7 +12,6 @@ services:
     environment:
       MYSQL_DATABASE: ingsw3
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
-      MYSQL_ROOT_PASSWORD: root
     healthcheck:
       test:
         [
@@ -32,13 +32,9 @@ services:
     restart: on-failure
     ports:
       - "8080:8080"
-    environment:
-      DB_NAME: ingsw3
-      DB_USER: root
-      DB_PASS: root
-      DB_HOST: "34.31.144.174"
-      DB_PORT: "3306"
-
+    depends_on:
+      db:
+        condition: service_healthy
   frontend:
     container_name: frontend
     build: ./frontend
