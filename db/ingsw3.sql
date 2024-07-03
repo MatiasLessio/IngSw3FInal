@@ -18,6 +18,7 @@
 --
 -- Table structure for table `reminders`
 --
+USE ingsw3;
 
 DROP TABLE IF EXISTS `reminders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
