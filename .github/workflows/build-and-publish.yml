@@ -42,7 +42,7 @@ jobs:
       run: gcloud auth configure-docker
 
     -name: Download Docker images
-        run: |
+      run: |
           docker pull matiaslessioucc/frontend:latest
           docker pull matiaslessioucc/backend:latest
           docker pull matiaslessioucc/db:latest
