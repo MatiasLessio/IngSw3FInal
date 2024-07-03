@@ -42,7 +42,9 @@ jobs:
           docker push gcr.io/ingsw3-428221/ingsw3final-frontend-gc:latest
           docker push gcr.io/ingsw3-428221/ingsw3final-backend-gc:latest
          
-
+    - name: Add IAM policy binding for Cloud Run invoker role
+      run: gcloud beta run services add-iam-policy-binding frontend --region=us-central1 --member=allUsers --role=roles/run.invoker
+            
     - name: Deploy Frontend
       run: |
           gcloud run deploy frontend \
