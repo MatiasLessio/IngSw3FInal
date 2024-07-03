@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  ingsw3:
+  db:
       container_name: db
       build: ./db
       image: ingsw3
@@ -23,7 +23,7 @@ services:
     ports:
       - "8090:8090"
     depends_on:
-      ingsw3:
+      db:
         condition: service_healthy
   frontend:
     container_name: frontend

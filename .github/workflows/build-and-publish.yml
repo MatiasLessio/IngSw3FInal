@@ -109,5 +109,5 @@ jobs:
         --allow-unauthenticated \
         --max-instances=15 \
         --add-cloudsql-instances=ingsw3-428221:us-central1:ingsw3 \
-        --set-env-vars=DB_HOST=${{ secrets.DB_HOST }},DB_PORT=${{ secrets.DB_PORT }},DB_NAME=${{ secrets.DB_NAME }},DB_USER=${{ secrets.DB_USER }},DB_PASS=${{ secrets.DB_PASS }}
+        --set-env-vars=DB_HOST=34.31.144.174,DB_PORT=3306,DB_NAME=ingsw3,DB_USER=root,DB_PASS=root
         gcloud run deploy frontend --image gcr.io/ingsw3-428221/frontend:latest --port=4200 --platform managed --region=us-central1 --allow-unauthenticated --max-instances=15
