@@ -2,7 +2,7 @@ version: '3'
 
 services:
   ingsw3:
-      container_name: ingsw3
+      container_name: db
       build: ./db
       image: ingsw3
       ports:
