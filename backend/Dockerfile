@@ -7,6 +7,7 @@ WORKDIR /backend
 
 # Add source code
 ADD . /backend
+RUN go mod init backend
 
 # Install dependencies
 RUN go mod tidy
