@@ -97,7 +97,7 @@ jobs:
         
     - name: Import SQL file to Cloud SQL
       run: |
-        gcloud --quiet sql import sql ingsw3-428221:us-central1:ingsw3 gs://ingsw3/ingwe3.sql
+        gcloud --quiet sql import sql ingsw3-428221:us-central1:ingsw3 gs://ingsw3/ingsw3.sql
 
     - name: Deploy backend and frontend to Google Cloud Run
       run: |
