@@ -39,7 +39,7 @@ jobs:
       run: |
         docker tag ingsw3final_backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
         docker tag ingsw3final_frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
-        docker tag ingsw3:latest ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
+        docker tag db:latest ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
       
     - name: Push images
       run: |
@@ -113,7 +113,7 @@ jobs:
       run: |
         gcloud run deploy backend \
         --image gcr.io/ingsw3-428221/backend:latest \
-        --port=8080 \
+        --port=8090 \
         --platform managed \
         --region=us-central1 \
         --allow-unauthenticated \
