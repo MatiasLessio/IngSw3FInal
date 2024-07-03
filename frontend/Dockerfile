@@ -3,19 +3,15 @@ FROM node:alpine AS build
 
 # Establece el directorio de trabajo en /app
 WORKDIR /app
+COPY package*.json ./
 
+COPY . ./
 
-COPY . .
-
-
+RUN npm install -g @angular/cli@16.2.0
 RUN npm install
 # Compila la aplicación Angular
-RUN npm run build --prod
+RUN npm run build
 
-# Utiliza una imagen ligera de Nginx para servir la aplicación
-FROM nginx:alpine
+EXPOSE 4200
 
-# Copia los archivos compilados al directorio de Nginx
-COPY --from=build /app/dist/frontend /usr/share/nginx/html
-
-
+CMD [ "node", "server.js" ]
