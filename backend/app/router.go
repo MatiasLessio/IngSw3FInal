@@ -55,5 +55,5 @@ func StartApp() {
 	}
 
 	// Iniciar el servidor
-	engine.Run("")
+	engine.Run()
 }
