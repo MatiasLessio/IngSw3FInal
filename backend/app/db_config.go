@@ -25,7 +25,7 @@ func init() {
 	// ------------------------
 
 	// Verify environment variables
-	log.Infof("DBName: %s, DBUser: %s, DBHost: %s", DBName, DBUser, DBHost)
+	log.Infof("Envs: DBName: %s, DBUser: %s, DBHost: %s", DBName, DBUser, DBHost)
 
 	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")
 
