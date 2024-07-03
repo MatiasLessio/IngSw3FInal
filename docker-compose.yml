@@ -4,7 +4,6 @@ services:
   db:
     container_name: db
     build: ./db
-    image: ingsw3
     ports:
       - "3306:3306"
     volumes:
@@ -12,6 +11,7 @@ services:
     environment:
       MYSQL_DATABASE: ingsw3
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+      MYSQL_ROOT_PASSWORD: root
     healthcheck:
       test:
         [
