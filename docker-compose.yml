@@ -5,7 +5,7 @@ services:
     build: ./db
     environment:
       MYSQL_DATABASE: ingsw3
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
     ports:
       - "3306:3306"
     volumes:
