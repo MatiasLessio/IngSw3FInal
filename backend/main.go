@@ -6,5 +6,5 @@ import (
 
 func main() {
 	app.StartDbEngine()
-	app.StartApp()
+	app.StartRoute()
 }
