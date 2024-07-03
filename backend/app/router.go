@@ -20,6 +20,6 @@ func StartApp() {
 	}))
 	mapUrls(router)
 	log.Info("Starting server")
-	_ = router.Run("8090")
+	router.Run("backend-5ynfwgsmkq-uc.a.run.app")
 
 }
