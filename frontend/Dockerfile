@@ -11,7 +11,7 @@ RUN npm install -g @angular/cli@16.2.0
 RUN npm install sweetalert2
 RUN npm install
 # Compila la aplicación Angular
-RUN npm run build --base-href /frontend/
+RUN npm run build -- --base-href /frontend/
 
 EXPOSE 4200
 
