@@ -37,5 +37,5 @@ func mapUrls(engine *gin.Engine) {
 		authorized.DELETE("/api/Reminders/Delete/:reminderId", reminderControllerImplementation.DeleteReminder)
 	}
 
-	log.Info("finishing url mappings...")
+	log.Info("Finishing url mappings...")
 }
