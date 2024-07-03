@@ -4,8 +4,8 @@ on:
     branches:
       - main
 jobs:
-
   build_publish_deploy:
+
     runs-on: ubuntu-latest
     steps:
     
@@ -20,15 +20,15 @@ jobs:
 
     - name: Tag Docker Images
       run: |
-          docker tag frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
-          docker tag backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
-          docker tag db:latest ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
+        docker tag frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+        docker tag backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+        docker tag db:latest ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
 
     - name: Push Docker images
       run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
 
 
     - name: Configurar auth Google Cloud CLI
@@ -43,9 +43,9 @@ jobs:
 
     - name: Download Docker images
       run: |
-          docker pull matiaslessioucc/frontend:latest
-          docker pull matiaslessioucc/backend:latest
-          docker pull matiaslessioucc/db:latest
+        docker pull matiaslessioucc/frontend:latest
+        docker pull matiaslessioucc/backend:latest
+        docker pull matiaslessioucc/db:latest
 
 
     - name: Run Docker db container to extract SQL file
