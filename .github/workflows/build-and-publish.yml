@@ -77,26 +77,13 @@ jobs:
 
     - name: Tag backend and frontend Docker images
       run: |
-        docker tag matiaslessioucc/db:latest gcr.io/ingsw3-428221/db:latest
         docker tag matiaslessioucc/backend:latest gcr.io/ingsw3-428221/backend:latest
         docker tag matiaslessioucc/frontend:latest gcr.io/ingsw3-428221/frontend:latest
 
     - name: Push backend and frontend Docker images to Google Container Registry
       run: |
-        docker push gcr.io/ingsw3-428221/db:latest
         docker push gcr.io/ingsw3-428221/backend:latest
         docker push gcr.io/ingsw3-428221/frontend:latest
-
-    - name: Deploy DB to Google Cloud Run
-      run: |
-        gcloud run deploy db \
-         --image gcr.io/ingsw3-428221/db:latest \
-         --port=3306 \
-         --platform managed \
-         --region=us-central1 \
-         --allow-unauthenticated \
-         --max-instances=15 \
-         --set-env-vars MYSQL_ROOT_PASSWORD=root,MYSQL_ALLOW_EMPTY_PASSWORD=1
 
     - name: Deploy frontend to Google Cloud Run
       run: |

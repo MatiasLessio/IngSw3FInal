@@ -1,19 +1,6 @@
 version: '3'
 
 services:
-  db:
-    build: ./db
-    environment:
-      MYSQL_DATABASE: ingsw3
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
-    ports:
-      - "3306:3306"
-    volumes:
-      - ./db:/docker-entrypoint-initdb.d
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "db", "-u", "root","-p root"]
-      timeout: 20s
-      retries: 10
   frontend:
     build: ./frontend
     depends_on:
