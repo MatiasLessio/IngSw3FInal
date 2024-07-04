@@ -74,31 +74,29 @@ jobs:
         docker pull matiaslessioucc/backend:latest
         docker pull matiaslessioucc/frontend:latest
         docker pull matiaslessioucc/db:latest
-    
-    - name: Run Docker db container to extract SQL file
-      run: |
-        docker create --name temp-container matiaslessioucc/db:latest
-        docker cp temp-container:/docker-entrypoint-initdb.d/ingsw3.sql ./ingsw3.sql
-        docker rm temp-container
-
-    - name: Upload SQL file to Cloud Storage
-      run: gsutil cp ./ingsw3.sql gs://ingsw3
 
     - name: Tag backend and frontend Docker images
       run: |
+        docker tag matiaslessioucc/db:latest gcr.io/ingsw3-428221/backend:latest
         docker tag matiaslessioucc/backend:latest gcr.io/ingsw3-428221/backend:latest
         docker tag matiaslessioucc/frontend:latest gcr.io/ingsw3-428221/frontend:latest
 
     - name: Push backend and frontend Docker images to Google Container Registry
       run: |
+        docker push gcr.io/ingsw3-428221/db:latest
         docker push gcr.io/ingsw3-428221/backend:latest
         docker push gcr.io/ingsw3-428221/frontend:latest
-        
-    - name: Import SQL file to Cloud SQL
-      run: |
-        gcloud config set project ingsw3-428221
-        gcloud --quiet sql import sql ingsw3 gs://ingsw3/ingsw3.sql
 
+    - name: Deploy DB to Google Cloud Run
+      run: |
+        gcloud run deploy db \
+         --image gcr.io/ingsw3-428221/db:latest \
+         --port=3306 \
+         --platform managed \
+         --region=us-central1 \
+         --allow-unauthenticated \
+         --max-instances=15
+         
     - name: Deploy frontend to Google Cloud Run
       run: |
         gcloud run deploy frontend \
