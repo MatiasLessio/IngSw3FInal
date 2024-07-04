@@ -1,18 +1,17 @@
 exports.config = {
-    tests: './e2e/tests/*_test.js',
-    output: './e2e/output',
+    tests: './tests/*_test.js',
+    output: './output',
     helpers: {
-      Puppeteer: {
-        url: 'https://frontend-5ynfwgsmkq-uc.a.run.app',
-        show: true,
-        windowSize: '1920x1080'
-      }
+        Playwright: {
+            url: 'https://frontend-5ynfwgsmkq-uc.a.run.app', // Cambia la URL base según tu entorno
+            show: true, // Opcional: muestra el navegador durante las pruebas
+            browser: 'chromium' // Puedes cambiar a 'firefox' o 'webkit' según tus necesidades
+        }
     },
     include: {
-      I: './e2e/steps_file.js'
+        I: './steps_file.js'
     },
     bootstrap: null,
     mocha: {},
     name: 'frontend'
-  }
-  
+}

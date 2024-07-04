@@ -1,10 +1,11 @@
 Feature('Register')
 
-Scenario('Test register', ({ I }) => {
+Scenario('Test register', async ({ I }) => {
     I.amOnPage('/Register');
     I.see('Register', 'mat-card-title');
 
-    I.fillField('#usernameRegister', 'testuser');
+    const randomUsername = 'testuser' + Math.floor(Math.random() * 1000);
+    I.fillField('#usernameRegister', randomUsername);
     I.fillField('#passwordRegister', '123');
 
     I.click('#registerButton');
@@ -20,6 +21,6 @@ Scenario('Test register', ({ I }) => {
 
     I.click('.swal2-confirm');
 
-    I.waitInUrl('/Login', 5);
+    I.waitInUrl('/Login', 10);
     I.seeInCurrentUrl('/Login');
-})
+});

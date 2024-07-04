@@ -3,7 +3,7 @@
         <h1>Home / <strong>Reminders</strong></h1>
         <h2>Hi <strong>{{user}}</strong></h2>
     </div>
-    <button mat-button (click)="addReminder()" color="warn" matTooltip="Add a new Reminder">Add new reminder</button>
+    <button mat-button (click)="addReminder()" id="addReminder" color="warn" matTooltip="Add a new Reminder">Add new reminder</button>
     <div class="alert-container">
         
         <div *ngFor="let reminder of reminders" class="alert-card">
@@ -14,8 +14,8 @@
                 <div class="alert-description">{{ reminder.description }}</div>
             </div>
             <div style="text-align: right;">
-                <mat-icon (click)="editReminder(reminder)" matTooltip="Edit Reminder">edit</mat-icon>
-                <mat-icon (click)="deleteReminder(reminder)" matTooltip="Delete Reminder">delete_forever</mat-icon>
+                <mat-icon (click)="editReminder(reminder)" id="editReminder" matTooltip="Edit Reminder">edit</mat-icon>
+                <mat-icon (click)="deleteReminder(reminder)" id="deleteReminder" matTooltip="Delete Reminder">delete_forever</mat-icon>
             </div>
             
         </div>
@@ -23,7 +23,7 @@
     
 </div>
 <div class="logout-container">
-    <button mat-button color="primary" matTooltip="LogOut" (click)="clear()"> <mat-icon class="logout-icon"  matTooltip="Log Out">logout</mat-icon>
+    <button mat-button color="primary" matTooltip="LogOut" id="logOut" (click)="clear()"> <mat-icon class="logout-icon"  matTooltip="Log Out">logout</mat-icon>
         LogOut</button>
     
 </div>
