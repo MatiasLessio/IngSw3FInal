@@ -2,6 +2,7 @@ version: '3'
 
 services:
   backend:
+    container_name: backend
     build: ./backend
     restart: on-failure
     ports:
