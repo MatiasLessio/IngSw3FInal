@@ -7,18 +7,18 @@
             <div style="display: flex; gap: 1rem;">
                 <mat-form-field appearance="fill" style="flex: 1;">
                     <mat-label>Username</mat-label>
-                    <input #usernameLogin matInput formControlName="username">
+                    <input id="usernameLogin" matInput formControlName="username">
                 </mat-form-field>
             </div>
             <div style="display: flex; gap: 1rem;">
                 <mat-form-field appearance="fill" style="flex: 1;">
                     <mat-label>Password</mat-label>
-                    <input #passwordLogin matInput type="password" formControlName="password">
+                    <input id="passwordLogin" matInput type="password" formControlName="password">
                 </mat-form-field>
             </div>
             <a style="color: white; margin-left: 1rem;" href="/Register">Register</a>
             <div style="display: flex; justify-content: end; padding: 1rem;">
-                <button mat-raised-button *ngIf="!loadingRequest" color="primary" #loginButton type="submit" (click)="login()">Login</button>
+                <button mat-raised-button *ngIf="!loadingRequest" color="primary" id="loginButton" type="submit" (click)="login()">Login</button>
                 <button *ngIf="loadingRequest" mat-button color="primary">
                     <mat-spinner diameter="24" style="display: flex; align-items: center;" color="warn"></mat-spinner>
                 </button>
