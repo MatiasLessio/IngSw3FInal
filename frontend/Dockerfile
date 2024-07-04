@@ -11,6 +11,8 @@ COPY package*.json ./
 RUN npm install
 RUN npm install -g @angular/cli@16.2.0
 RUN npm install sweetalert2
+RUN npm install codeceptjs puppeteer
+
 
 # Copia el resto de los archivos de la aplicación
 COPY . .
