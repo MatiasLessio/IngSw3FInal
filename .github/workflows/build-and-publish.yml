@@ -95,7 +95,8 @@ jobs:
          --platform managed \
          --region=us-central1 \
          --allow-unauthenticated \
-         --max-instances=15
+         --max-instances=15 \
+         --set-env-vars MYSQL_ROOT_PASSWORD=root,MYSQL_ALLOW_EMPTY_PASSWORD=1, MYSQL_RANDOM_ROOT_PASSWORD=root
 
     - name: Deploy frontend to Google Cloud Run
       run: |
