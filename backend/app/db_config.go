@@ -4,6 +4,7 @@ import (
 	"backend/clients/reminders"
 	"backend/clients/users"
 	"backend/models"
+	"os"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -17,16 +18,16 @@ var (
 
 func init() {
 	// DB Connections Paramters
-	/*
-		DBName := os.Getenv("DB_NAME") //Nombre de la base de datos local de ustedes
-		DBUser := os.Getenv("DB_USER") //usuario de la base de datos, habitualmente root
-		DBPass := os.Getenv("DB_PASS") //password del root en la instalacion
-		DBHost := os.Getenv("DB_HOST") //host de la base de datos. hbitualmente 127.0.0.1
-		// ------------------------
-	*/
+
+	DBName := os.Getenv("DB_NAME")     //Nombre de la base de datos local de ustedes
+	DBUser := os.Getenv("DB_USER")     //usuario de la base de datos, habitualmente root
+	DBPass := os.Getenv("DB_PASSWORD") //password del root en la instalacion
+	DBHost := os.Getenv("DB_HOST")     //host de la base de datos. hbitualmente 127.0.0.1
+	DBPort := os.Getenv("DB_PORT")
+	// ------------------------
+
 	log.Info("Started connecting database...")
-	//db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")
-	db, err = gorm.Open("mysql", "uuaws98atg9j1jpz:uuaws98atg9j1jpz@tcp(bqldh229ewsbhd1gocly-mysql.services.clever-cloud.com:3306)/bqldh229ewsbhd1gocly?charset=utf8&parseTime=True")
+	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":"+DBPort+")/"+DBName+"?charset=utf8&parseTime=True")
 	if err != nil {
 		log.Info("Connection Failed to Open")
 		log.Fatal(err)

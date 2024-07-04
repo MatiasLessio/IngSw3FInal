@@ -56,7 +56,7 @@ jobs:
       uses: google-github-actions/setup-gcloud@v0.5.0
       with:
         service_account_key: ${{ secrets.GCLOUD_AUTH  }}
-        project_id: ingsw3-428221
+        project_id: ${{ secrets.PROJECT_ID }}
         export_default_credentials: true
 
     - name: Configure Docker for Container Registry
@@ -74,33 +74,32 @@ jobs:
 
     - name: Tag backend and frontend Docker images
       run: |
-        docker tag matiaslessioucc/backend:latest gcr.io/ingsw3-428221/backend:latest
-        docker tag matiaslessioucc/frontend:latest gcr.io/ingsw3-428221/frontend:latest
+        docker tag matiaslessioucc/backend:latest gcr.io/${{ secrets.PROJECT_ID }}/backend:latest
+        docker tag matiaslessioucc/frontend:latest gcr.io/${{ secrets.PROJECT_ID }}/frontend:latest
 
     - name: Push backend and frontend Docker images to Google Container Registry
       run: |
-        docker push gcr.io/ingsw3-428221/backend:latest
-        docker push gcr.io/ingsw3-428221/frontend:latest
+        docker push gcr.io/${{ secrets.PROJECT_ID }}/backend:latest
+        docker push gcr.io/${{ secrets.PROJECT_ID }}/frontend:latest
 
-    - name: Deploy frontend to Google Cloud Run
+    - name: Deploy Frontend to Google Cloud Run
       run: |
         gcloud run deploy frontend \
-         --image gcr.io/ingsw3-428221/frontend:latest \
+         --image gcr.io/${{ secrets.PROJECT_ID }}/frontend:latest \
          --port=4200 \
          --platform managed \
          --region=us-central1 \
          --allow-unauthenticated \
          --max-instances=15
 
-    - name: Deploy backend and frontend to Google Cloud Run
+    - name: Deploy backend to Google Cloud Run
       run: |
         gcloud run deploy backend \
-        --image gcr.io/ingsw3-428221/backend:latest \
+        --image gcr.io/${{ secrets.PROJECT_ID }}/backend:latest \
         --port=8090 \
         --platform managed \
         --region=us-central1 \
         --allow-unauthenticated \
         --max-instances=15 \
-        --add-cloudsql-instances=ingsw3-428221:us-central1:ingsw3 \
-        --set-env-vars=DB_HOST=34.31.144.174,DB_PORT=3306,DB_NAME=ingsw3,DB_USER=root,DB_PASS=root
+        --set-env-vars=DB_HOST=${{ secrets.DB_HOST }},DB_PORT=${{ secrets.DB_PORT }},DB_NAME=${{ secrets.DB_NAME }},DB_USER=${{ secrets.DB_USER }},DB_PASS=${{ secrets.DB_PASSWORD }}
         

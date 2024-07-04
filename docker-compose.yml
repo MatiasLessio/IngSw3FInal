@@ -8,9 +8,6 @@ services:
       - "8090:8090"
   frontend:
     build: ./frontend
-    depends_on:
-      backend:
-        condition: service_healthy
     ports:
       - "4200:4200"
   
