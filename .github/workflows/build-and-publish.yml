@@ -39,13 +39,11 @@ jobs:
       run: |
         docker tag ingsw3final_backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
         docker tag ingsw3final_frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
-        docker tag ingsw3final_db:latest ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
       
     - name: Push images
       run: |
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/db:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -73,7 +71,6 @@ jobs:
       run: |
         docker pull matiaslessioucc/backend:latest
         docker pull matiaslessioucc/frontend:latest
-        docker pull matiaslessioucc/db:latest
 
     - name: Tag backend and frontend Docker images
       run: |
