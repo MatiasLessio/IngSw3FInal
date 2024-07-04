@@ -77,7 +77,7 @@ jobs:
 
     - name: Tag backend and frontend Docker images
       run: |
-        docker tag matiaslessioucc/db:latest gcr.io/ingsw3-428221/backend:latest
+        docker tag matiaslessioucc/db:latest gcr.io/ingsw3-428221/db:latest
         docker tag matiaslessioucc/backend:latest gcr.io/ingsw3-428221/backend:latest
         docker tag matiaslessioucc/frontend:latest gcr.io/ingsw3-428221/frontend:latest
 
@@ -96,7 +96,7 @@ jobs:
          --region=us-central1 \
          --allow-unauthenticated \
          --max-instances=15
-         
+
     - name: Deploy frontend to Google Cloud Run
       run: |
         gcloud run deploy frontend \
