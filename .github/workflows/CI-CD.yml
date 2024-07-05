@@ -38,19 +38,19 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: start containers
+    - name: Start Backend Container
       run: |
-        docker-compose up -d
+        docker-compose up -d backend
         
     - name: Set up Go
       uses: actions/setup-go@v2
       with:
         go-version: 1.18
 
-    - name: Execute unit tests
+    - name: Execute Unit Tests
       run: docker exec backend go test -v ./services/tests
         
-    - name: Stop containers
+    - name: Stop Backend Container
       run: |
         docker-compose down
 
@@ -76,17 +76,17 @@ jobs:
       run: |
         docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
-    - name: Download Docker images
+    - name: Download Docker images from dockerhub
       run: |
         docker pull matiaslessioucc/backend:latest
         docker pull matiaslessioucc/frontend:latest
 
-    - name: Tag backend and frontend Docker images
+    - name: Tag Backend and Frontend Docker images
       run: |
         docker tag matiaslessioucc/backend:latest gcr.io/${{ secrets.PROJECT_ID }}/backend:latest
         docker tag matiaslessioucc/frontend:latest gcr.io/${{ secrets.PROJECT_ID }}/frontend:latest
 
-    - name: Push backend and frontend Docker images to Google Container Registry
+    - name: Push Backend and Frontend Docker images to Google Container Artifact Registry
       run: |
         docker push gcr.io/${{ secrets.PROJECT_ID }}/backend:latest
         docker push gcr.io/${{ secrets.PROJECT_ID }}/frontend:latest
@@ -125,7 +125,7 @@ jobs:
               with:
                 node-version: 'latest'
         
-            - name: Install dependencies and CodeceptJS
+            - name: Install dependencies for integration tests
               working-directory: ./frontend
               run: | 
                 npx playwright install --force
