@@ -35,17 +35,16 @@ func (s *userService) Register(request dto.AuthDto) (dto.AuthDto, e.ApiError) {
 func TestLogin(t *testing.T) {
 
 	service := &userService{userClient: NewUserMockClient()}
-	/*
 	request := dto.AuthDto{
 		Username: "admin",
 		Password: "123",
 	}
-	*/
+	/*
 	request := dto.AuthDto{
 		Username: "failtest",
 		Password: "123",
 	}
-	
+	*/
 
 	_, err := service.Login(request)
 	assert.NoError(t, err, "wrong pw or username")
