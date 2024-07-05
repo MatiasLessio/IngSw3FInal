@@ -130,7 +130,7 @@ jobs:
                 node-version: 'latest'
         
             - name: Install dependencies and CodeceptJS
-              working-directory: ./frontend/e2e
+              working-directory: ./frontend
               run: | 
                 npx playwright install --force
                 npm install --force
@@ -138,5 +138,5 @@ jobs:
               
         
             - name: Run Integration Tests
-              working-directory: ./frontend
+              working-directory: ./frontend/e2e
               run: xvfb-run -a npx codeceptjs run --steps
