@@ -1,31 +1,37 @@
 Feature('Home Page');
 
-const loginSteps = require('./login_steps');
+const loginSteps = require('./login_steps')
+const addExampleReminder = require('./add_example_reminder')
 
-Scenario('Add Reminder', async ({ I }) => {
+Scenario('Update Reminder', async ({ I }) => {
     loginSteps.login('test', '123');
     I.amOnPage('');
 
-    
     I.see('Home / Reminders', 'h1');
     I.seeElement('.logout-container');
 
-    const username = 'test'; I.see(`Hi ${username}`, 'h2');
+    const username = 'test';
+    I.see(`Hi ${username}`, 'h2');
+    await I.wait(1);
+    addExampleReminder.addExampleReminder();
 
-    I.click('#addReminder');
+    await I.wait(1);
+    await I.waitForElement('.alert-card', 10);
 
-    const title = 'Test Reminder';
-    const description = 'This is a test reminder';
+    I.click('.alert-card:last-child #editReminder');
+    await I.wait(1);
+
+    const title = 'Updated reminder title';
+    const description = 'I updated this description';
     I.fillField('#title', title);
     I.fillField('#description', description);
 
     I.click('#saveReminder');
 
-    I.waitForElement('.swal2-popup', 15); 
-
-    I.seeElement('.swal2-success');
-
+    I.waitForElement('.swal2-popup', 15);
+    await I.wait(1);
     I.click('.swal2-confirm');
+    await I.wait(1);
 
     await I.wait(1);
     await I.waitForElement('.alert-card', 10);
@@ -40,6 +46,4 @@ Scenario('Add Reminder', async ({ I }) => {
 
     I.click('.swal2-confirm');
 
-    I.waitInUrl('', 15);
-    await I.wait(1);
 });

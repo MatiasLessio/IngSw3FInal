@@ -105,4 +105,28 @@ jobs:
         --allow-unauthenticated \
         --max-instances=15 \
         --set-env-vars=DB_HOST=${{ secrets.DB_HOST }},DB_PORT=${{ secrets.DB_PORT }},DB_NAME=${{ secrets.DB_NAME }},DB_USER=${{ secrets.DB_USER }},DB_PASS=${{ secrets.DB_PASSWORD }}
+  integration-tests:
+
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+            
+            - name: Checkout code
+              uses: actions/checkout@v2
         
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                node-version: 'latest'
+        
+            - name: Install dependencies and CodeceptJS
+              working-directory: ./frontend
+              run: | 
+                npx playwright install --force
+                npm install --force
+                sudo apt-get install -y xvfb
+              
+        
+            - name: Run Integration Tests
+              working-directory: ./frontend
+              run: xvfb-run -a npx codeceptjs run --steps
