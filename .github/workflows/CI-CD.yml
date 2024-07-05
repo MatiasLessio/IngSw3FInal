@@ -38,10 +38,6 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Build images
-      run: |
-        docker-compose build
-
     - name: start containers
       run: |
         docker-compose up -d
