@@ -23,7 +23,7 @@ Scenario('Delete Reminder', async ({ I }) => {
     I.waitForElement('.swal2-popup', 15);
     await I.wait(1);
     I.click('.swal2-confirm');
-    await I.wait(1);
+    await I.wait(2);
     I.seeElement('.swal2-success');
 
     I.click('.swal2-confirm');
