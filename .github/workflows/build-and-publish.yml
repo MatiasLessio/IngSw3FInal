@@ -120,7 +120,7 @@ jobs:
                 node-version: 'latest'
         
             - name: Install dependencies and CodeceptJS
-              working-directory: ./frontend
+              working-directory: ./frontend/e2e
               run: | 
                 npx playwright install --force
                 npm install --force
